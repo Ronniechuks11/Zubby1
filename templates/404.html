@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Page not found — {{ site.name }}{% endblock %}
+{% block meta %}<meta name="robots" content="noindex">{% endblock %}
+{% block content %}
+<section class="hero" id="home">
+  <div class="hero-echoes" aria-hidden="true">
+    {% for _ in range(5) %}
+    <svg class="echo" viewBox="0 0 405 429"><path d="M0 112H103L173 241L285 33H322L173 309L83 144H54L173 361L368 0H405L173 429Z"/></svg>
+    {% endfor %}
+  </div>
+  <div class="container hero-content">
+    <div class="eyebrow">Error 404</div>
+    <h1>
+      <span class="line"><span>This page</span></span>
+      <span class="line"><span>didn't get</span></span>
+      <span class="line"><span class="accent">remembered.</span></span>
+    </h1>
+    <p class="hero-copy">The page you're looking for has moved, or never existed. Let's get you back to something worth remembering.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary magnetic" href="{{ url_for('home') }}">Back to home <span class="btn-arrow">↗</span></a>
+      <a class="btn btn-ghost" href="{{ url_for('home') }}#contact">Start a campaign <span class="btn-arrow">↗</span></a>
+    </div>
+  </div>
+</section>
+{% endblock %}

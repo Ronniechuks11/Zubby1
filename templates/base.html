@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#6B0000">
+  {% if not site.allow_indexing %}<meta name="robots" content="noindex, nofollow">{% endif %}
+  {% block meta %}
+  <meta name="description" content="{{ site.description }}">
+  <meta property="og:title" content="{{ site.name }} — {{ site.tagline }}">
+  <meta property="og:description" content="Sharp strategy, scroll-stopping content and Meta ads built to convert.">
+  <meta property="og:type" content="website">
+  {% endblock %}
+  <title>{% block title %}{{ site.name }} — {{ site.tagline }}{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400;500&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="{{ asset_url('img/favicon.svg') }}">
+  <link rel="stylesheet" href="{{ asset_url('css/style.css') }}">
+  <noscript><style>body.is-locked{overflow:auto}.loader{display:none}</style></noscript>
+  {% if site.meta_pixel_id %}
+  <!-- Meta Pixel -->
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', {{ site.meta_pixel_id|tojson }});
+    fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id={{ site.meta_pixel_id|urlencode }}&ev=PageView&noscript=1"></noscript>
+  {% endif %}
+</head>
+<body class="{% block body_class %}{% endblock %}">
+  <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor-dot" aria-hidden="true"></div><div class="cursor-ring" aria-hidden="true"></div>
+
+  {% block loader %}{% endblock %}
+
+  {% include "partials/_nav.html" %}
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  {% include "partials/_footer.html" %}
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js" defer></script>
+  <script src="{{ asset_url('js/main.js') }}" defer></script>
+</body>
+</html>
